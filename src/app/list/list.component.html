@@ -1,0 +1,68 @@
+<div class="page-wrap">
+    <h3 class="page-title">Clients</h3>
+    <article>
+
+        <button mat-raised-button color="primary" (click)="addNewRecord()">Add Client</button>
+        <mat-slide-toggle
+                class="db-toggle"
+                color="accent"
+                [disabled]="false"
+                [(ngModel)]="isLocalDBEnabled"
+                (toggleChange)="handleToggle($event)"
+        >
+            Use localDB
+        </mat-slide-toggle>
+    </article>
+    <article>
+        <table mat-table [dataSource]="clientsList" class="mat-elevation-z8">
+            <ng-container matColumnDef="fullName">
+                <th mat-header-cell *matHeaderCellDef> Full Name </th>
+                <td mat-cell *matCellDef="let element" (click)="selectClient(element)"> {{element.fullName}} </td>
+            </ng-container>
+            <ng-container matColumnDef="firstName">
+                <th mat-header-cell *matHeaderCellDef> First Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="lastName">
+                <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phone">
+                <th mat-header-cell *matHeaderCellDef> Phone </th>
+                <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="income">
+                <th mat-header-cell *matHeaderCellDef> Income </th>
+                <td mat-cell *matCellDef="let element"> {{element.income / 100 | currency}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element">
+                    <button mat-raised-button color="accent" (click)="deleteRecord(element)">Delete</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+    </article>
+    <article *ngIf="selectedClient">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{selectedClient.fullName}}</mat-card-title>
+                <mat-card-subtitle>First Name: {{selectedClient.firstName}}</mat-card-subtitle>
+                <mat-card-subtitle>Last Name: {{selectedClient.lastName}}</mat-card-subtitle>
+                <mat-card-subtitle>Phone: {{selectedClient.phone}}</mat-card-subtitle>
+                <mat-card-subtitle>Email: {{selectedClient.email}}</mat-card-subtitle>
+                <mat-card-subtitle>Comment: {{selectedClient.comment}}</mat-card-subtitle>
+            </mat-card-header>
+        </mat-card>
+    </article>
+</div>
+

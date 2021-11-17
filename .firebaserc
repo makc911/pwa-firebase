@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "clients-app-20bb2": {
+      "hosting": {
+        "clients": [
+          "clients-app-20bb2"
+        ]
+      }
+    }
+  }
+}
